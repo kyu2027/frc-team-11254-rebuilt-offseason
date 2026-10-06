@@ -23,8 +23,15 @@ public final class Autos {
 
   public static Command sideAuto(Drive drive, Shooter shooter) {
     return Commands.sequence(
-      drive.timeDrive(-0.15, 1.5),
+      drive.timeDrive(1.5, -0.15),
       new ShootWithDelay(shooter)
     );
   }
+
+  public static Command middleAuto(Drive drive, Shooter shooter){
+     return Commands.sequence(
+      drive.timeDrive(1.5, -0.2),
+      new ShootWithDelay(shooter)
+     );
+   }
 }
