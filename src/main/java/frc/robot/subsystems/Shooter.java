@@ -70,8 +70,12 @@ public class Shooter extends SubsystemBase {
 
   public void shoot() {
     shootermotor.set(0.75);
+  }
+
+  public void feed(){
     feeder.set(-0.25);
   }
+    
 
   @Override
   public void periodic() {

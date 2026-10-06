@@ -13,7 +13,10 @@ import frc.robot.subsystems.ExampleSubsystem;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -46,6 +49,7 @@ public class RobotContainer {
   private JoystickButton outtakeButton;
   private XboxController driver;
   private XboxController operator;
+  private SendableChooser<Command> autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -60,7 +64,10 @@ public class RobotContainer {
     shootButton = new JoystickButton(operator, XboxController.Button.kA.value);
     intakeButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
     outtakeButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
-  
+
+    autoChooser = new SendableChooser<>();
+    autoChooser.addOption("side auto", Autos.sideAuto(tankDrive, shooter));
+    SmartDashboard.putData(autoChooser);
 
     // Configure the trigger bindings
     configureBindings();
@@ -96,6 +103,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return autoChooser.getSelected();
   }
 }
