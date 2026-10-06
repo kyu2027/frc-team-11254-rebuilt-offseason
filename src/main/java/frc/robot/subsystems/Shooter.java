@@ -51,15 +51,15 @@ public class Shooter extends SubsystemBase {
   }
 
   public void intake() {
-    shootermotor.set(0.25);
-    intake.set(0.25);
-    feeder.set(0.5);
+    shootermotor.set(0.1);
+    intake.set(0.2);
+    feeder.set(0.1);
   }
 
   public void outtake() {
-    shootermotor.set(-0.25);
-    intake.set(-0.25);
-    feeder.set(-0.5);
+    shootermotor.set(-0.1);
+    intake.set(-0.2);
+    feeder.set(-0.1);
   }
 
   public void stop() {
@@ -69,7 +69,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shoot() {
-    shootermotor.set(0.75);
+    shootermotor.set(0.3);
   }
 
   public void feed(){
