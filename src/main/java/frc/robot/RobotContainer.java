@@ -23,6 +23,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -49,6 +51,7 @@ public class RobotContainer {
   private JoystickButton outtakeButton;
   private XboxController driver;
   private XboxController operator;
+  private UsbCamera camera;
   private SendableChooser<Command> autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -68,6 +71,10 @@ public class RobotContainer {
     autoChooser = new SendableChooser<>();
     autoChooser.addOption("side auto", Autos.sideAuto(tankDrive, shooter));
     SmartDashboard.putData(autoChooser);
+
+    camera = CameraServer.startAutomaticCapture();
+    camera.setResolution(320, 420);
+    camera.setFPS(30);
 
     // Configure the trigger bindings
     configureBindings();
